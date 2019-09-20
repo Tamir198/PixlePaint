@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
@@ -127,11 +128,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    <Button
-        android:id="@+id/button11"
+    <com.rtugeek.android.colorseekbar.ColorSeekBar
+        android:id="@+id/seekBar"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="place color picker here"
+        app:colorSeeds="@array/material_colors"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHeight_percent="0.1"
@@ -142,7 +143,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Select your color"
-        app:layout_constraintBottom_toTopOf="@+id/button11"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
@@ -218,6 +219,10 @@
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/button5">
     </TableLayout>
+
+
+
+
 
 
 
