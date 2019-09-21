@@ -3,51 +3,58 @@ package com.kotlin.pixlepaint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TableLayout
 import android.widget.TableRow
 import com.rtugeek.android.colorseekbar.ColorSeekBar
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
 
-    var currentColor = 1
+    private lateinit var smallTableBtn: Button
+    private lateinit var mediumTableBtn: Button
+    private lateinit var largeTableBtn: Button
+    private lateinit var cameraBtn: Button
+    private lateinit var deleteBtn: Button
+    private lateinit var screenshotBtn: Button
+
+    var currentColor = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        configureTable()
+        initViews()
+        configureTable(5,8)
+        currentSeekBarColor()
+    }
+
+    private fun currentSeekBarColor() {
+        //saves the current picked color
 
         val mSeekBar = findViewById<ColorSeekBar>(R.id.seekBar)
-        val someButton = findViewById<Button>(R.id.button12)
-
+        val someButton = findViewById<Button>(R.id.screenshot)
         mSeekBar.setOnColorChangeListener { colorBarPosition, alphaBarPosition, color ->
             someButton.setTextColor(color)
             currentColor = color
             Log.i("currentColor", "${mSeekBar.getColor(true)}")
         }
 
-
-
     }
 
 
-    private fun configureTable() {
-        //val table = TableLayout(this)
+    private fun configureTable( rows:Int,cellsInRow:Int) {
         val table = findViewById<TableLayout>(R.id.table)
-        for (i in 0..10) {
+        table.removeAllViews()
+        for (rows in 0..rows) {
             val row = TableRow(this)
-            for (j in 0..19) {
+            for (cellsInRow in 0..cellsInRow) {
 
-                val cell = Button(this)
+                val cell = Button(this)//create view for row
                 clickTheCell(cell)
                 configureCellLook(cell)
                 row.addView(cell)
@@ -59,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun clickTheCell(cell: Button) {
         cell.setOnClickListener {
             cell.setTextColor(Color.WHITE)
-           // cell.setTextColor(currentColor)
+            // cell.setTextColor(currentColor)
             cell.setBackgroundColor(currentColor)
         }
     }
@@ -75,6 +82,53 @@ class MainActivity : AppCompatActivity() {
         cell.text = "."
         cell.setTextColor(Color.BLACK)
         cell.setBackgroundColor(Color.WHITE)
+
+    }
+
+    override fun onClick(v: View?) {//when a button is clicked
+        when (v?.id) {
+            R.id.small -> {
+                configureTable(5,3)
+            }
+            R.id.medium -> {
+                configureTable(9,8)
+            }
+            R.id.large -> {
+                configureTable(11,14)
+            }
+            R.id.camera -> {
+                Toast.makeText(this, "camera clicked", Toast.LENGTH_SHORT).show()
+            }
+            R.id.delete -> {
+                Toast.makeText(this, "delete clicked", Toast.LENGTH_SHORT).show()
+            }
+            R.id.screenshot -> {
+                Toast.makeText(this, "screenshot clicked", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+    override fun initViews() {
+        smallTableBtn = findViewById(R.id.small)
+        smallTableBtn.setOnClickListener(this)
+
+        mediumTableBtn = findViewById(R.id.medium)
+        mediumTableBtn.setOnClickListener(this)
+
+        largeTableBtn = findViewById(R.id.large)
+        largeTableBtn.setOnClickListener(this)
+
+        cameraBtn = findViewById(R.id.camera)
+        cameraBtn.setOnClickListener(this)
+
+        deleteBtn = findViewById(R.id.delete)
+        deleteBtn.setOnClickListener(this)
+
+
+        //todo check why this button is not clickable
+        screenshotBtn = findViewById(R.id.delete)
+        screenshotBtn.setOnClickListener(this)
 
     }
 }
