@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PixlePaint</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+
+    <string name="screenshot">Take a screenshot</string>
 </resources>
