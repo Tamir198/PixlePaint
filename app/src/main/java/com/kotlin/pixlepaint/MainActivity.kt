@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
     private lateinit var deleteBtn: Button
     private lateinit var screenshotBtn: Button
 
-    var currentColor = 0
+    private var currentColor = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +29,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
         setContentView(R.layout.activity_main)
 
         initViews()
-        configureTable(5,8)
+        configureTable(11, 14)
         currentSeekBarColor()
+
+
     }
 
     private fun currentSeekBarColor() {
@@ -47,20 +49,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
     }
 
 
-    private fun configureTable( rows:Int,cellsInRow:Int) {
+    private fun configureTable(rows: Int, cellsInRow: Int) {
         val table = findViewById<TableLayout>(R.id.table)
         table.removeAllViews()
         for (rows in 0..rows) {
             val row = TableRow(this)
             for (cellsInRow in 0..cellsInRow) {
-
                 val cell = Button(this)//create view for row
-                clickTheCell(cell)
                 configureCellLook(cell)
+                clickTheCell(cell)
+
                 row.addView(cell)
             }
             table.addView(row)
         }
+        
     }
 
     private fun clickTheCell(cell: Button) {
@@ -88,13 +91,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
     override fun onClick(v: View?) {//when a button is clicked
         when (v?.id) {
             R.id.small -> {
-                configureTable(5,3)
+                configureTable(5, 3)
+                highlightBtn(R.id.small)
+
             }
             R.id.medium -> {
-                configureTable(9,8)
+                configureTable(9, 8)
+                highlightBtn(R.id.medium)
             }
             R.id.large -> {
-                configureTable(11,14)
+                configureTable(11, 14)
+                highlightBtn(R.id.large)
             }
             R.id.camera -> {
                 Toast.makeText(this, "camera clicked", Toast.LENGTH_SHORT).show()
@@ -130,6 +137,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
         screenshotBtn = findViewById(R.id.delete)
         screenshotBtn.setOnClickListener(this)
 
+    }
+
+    private fun highlightBtn(highlighted: Int) { //place border on the chosen table button
+        when (highlighted) {
+            R.id.small -> {
+                smallTableBtn.background = getDrawable(R.drawable.selected_button)
+                mediumTableBtn.background = getDrawable(R.drawable.non_selected_button)
+                largeTableBtn.background = getDrawable(R.drawable.non_selected_button)
+
+            }
+            R.id.medium -> {
+                mediumTableBtn.background = getDrawable(R.drawable.selected_button)
+                smallTableBtn.background = getDrawable(R.drawable.non_selected_button)
+                largeTableBtn.background = getDrawable(R.drawable.non_selected_button)
+
+            }
+            R.id.large -> {
+                largeTableBtn.background = getDrawable(R.drawable.selected_button)
+                smallTableBtn.background = getDrawable(R.drawable.non_selected_button)
+                mediumTableBtn.background = getDrawable(R.drawable.non_selected_button)
+
+            }
+
+        }
     }
 }
 

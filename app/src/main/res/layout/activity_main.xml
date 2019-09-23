@@ -149,6 +149,8 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
 
+
+
     <Button
         android:id="@+id/delete"
         android:layout_width="0dp"
@@ -165,6 +167,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/small"
+        android:background="@drawable/non_selected_button"
         app:layout_constraintBottom_toBottomOf="@+id/delete"
         app:layout_constraintEnd_toStartOf="@+id/medium"
         app:layout_constraintHeight_percent="0.075"
@@ -176,6 +179,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/medium"
+        android:background="@drawable/non_selected_button"
         app:layout_constraintBottom_toBottomOf="@+id/delete"
         app:layout_constraintEnd_toStartOf="@+id/large"
         app:layout_constraintHeight_percent="0.075"
@@ -199,6 +203,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/large"
+        android:background="@drawable/selected_button"
         app:layout_constraintBottom_toBottomOf="@+id/camera"
         app:layout_constraintEnd_toStartOf="@+id/camera"
         app:layout_constraintHeight_percent="0.075"
