@@ -1,15 +1,22 @@
 package com.kotlin.pixlepaint
 
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TableLayout
-import android.widget.TableRow
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.widget.*
+import kotlinx.android.synthetic.main.activity_main.*
+import com.abdallahalaraby.blink.Screenshot
+import android.os.Environment
+import android.provider.MediaStore
+import androidx.core.content.ContextCompat
+import java.io.File
+import java.io.FileOutputStream
+import java.util.jar.Manifest
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
@@ -17,11 +24,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
     private lateinit var smallTableBtn: Button
     private lateinit var mediumTableBtn: Button
     private lateinit var largeTableBtn: Button
-    private lateinit var cameraBtn: Button
-    private lateinit var deleteBtn: Button
-    private lateinit var screenshotBtn: Button
+    private lateinit var undoBtn: Button
+    private lateinit var deleteBtn: ImageView
+    private lateinit var lastColorBtn: Button
 
     private var currentColor = 0
+    private var undoColor = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
         //saves the current picked color
 
         val mSeekBar = findViewById<ColorSeekBar>(R.id.seekBar)
-        val someButton = findViewById<Button>(R.id.screenshot)
         mSeekBar.setOnColorChangeListener { colorBarPosition, alphaBarPosition, color ->
-            someButton.setTextColor(color)
             currentColor = color
             Log.i("currentColor", "${mSeekBar.getColor(true)}")
         }
@@ -63,7 +69,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
             }
             table.addView(row)
         }
-        
+
     }
 
     private fun clickTheCell(cell: Button) {
@@ -71,6 +77,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
             cell.setTextColor(Color.WHITE)
             // cell.setTextColor(currentColor)
             cell.setBackgroundColor(currentColor)
+            //saves the last color for the "undo" button
+            undoColor = currentColor
+            lastColorBtn.setBackgroundColor(currentColor)
         }
     }
 
@@ -104,17 +113,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
                 highlightBtn(R.id.large)
             }
             R.id.camera -> {
-                Toast.makeText(this, "camera clicked", Toast.LENGTH_SHORT).show()
+                //todo check is the user accepted the permission and toast it
+                val bitmap = Screenshot.getInstance()
+                    .takeScreenshotForView(findViewById(R.id.table)) // Take Screenshot for View
+                deleteBtn.setImageBitmap(bitmap)
+
+                MediaStore.Images.Media.insertImage(contentResolver, bitmap, "title", "description")
+
             }
             R.id.delete -> {
                 Toast.makeText(this, "delete clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.screenshot -> {
+            R.id.returnLastColor -> {
                 Toast.makeText(this, "screenshot clicked", Toast.LENGTH_SHORT).show()
+                seekBar.color = undoColor
             }
 
         }
     }
+
 
     override fun initViews() {
         smallTableBtn = findViewById(R.id.small)
@@ -126,16 +143,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
         largeTableBtn = findViewById(R.id.large)
         largeTableBtn.setOnClickListener(this)
 
-        cameraBtn = findViewById(R.id.camera)
-        cameraBtn.setOnClickListener(this)
+        undoBtn = findViewById(R.id.camera)
+        undoBtn.setOnClickListener(this)
 
         deleteBtn = findViewById(R.id.delete)
         deleteBtn.setOnClickListener(this)
 
-
-        //todo check why this button is not clickable
-        screenshotBtn = findViewById(R.id.delete)
-        screenshotBtn.setOnClickListener(this)
+        lastColorBtn = findViewById(R.id.returnLastColor)
+        lastColorBtn.setOnClickListener(this)
 
     }
 
