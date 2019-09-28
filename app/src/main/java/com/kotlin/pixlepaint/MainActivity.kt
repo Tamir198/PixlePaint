@@ -1,5 +1,6 @@
 package com.kotlin.pixlepaint
 
+import android.content.ContentResolver
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -118,7 +119,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
                     .takeScreenshotForView(findViewById(R.id.table)) // Take Screenshot for View
                 deleteBtn.setImageBitmap(bitmap)
 
-                MediaStore.Images.Media.insertImage(contentResolver, bitmap, "title", "description")
+                SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
+
+
+
 
             }
             R.id.delete -> {
