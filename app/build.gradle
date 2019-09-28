@@ -35,6 +35,9 @@ dependencies {
     //Color seekbar https://github.com/rtugeek/ColorSeekBar
     implementation 'com.github.rtugeek:colorseekbar:1.7.5'
 
+    //screenshot ofa view library: https://github.com/abdallahalaraby/Blink
+    implementation  'com.abdallahalaraby.blink:library:0.1.2@aar'
+
 
 
 
