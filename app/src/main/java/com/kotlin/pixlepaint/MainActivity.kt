@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
     private lateinit var undoBtn: Button
     private lateinit var deleteBtn: ImageView
     private lateinit var lastColorBtn: Button
+    private lateinit var eraser: Button
 
     private var currentColor = 0
     private var undoColor = 0
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
 
     private fun clickTheCell(cell: Button) {
         cell.setOnClickListener {
-            cell.setTextColor(Color.WHITE)
+            cell.setTextColor(Color.BLACK)
             // cell.setTextColor(currentColor)
             cell.setBackgroundColor(currentColor)
             //saves the last color for the "undo" button
@@ -114,23 +115,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
                 highlightBtn(R.id.large)
             }
             R.id.camera -> {
-                //todo check is the user accepted the permission and toast it
-                val bitmap = Screenshot.getInstance()
-                    .takeScreenshotForView(findViewById(R.id.table)) // Take Screenshot for View
+                val bitmap = Screenshot.getInstance().takeScreenshotForView(findViewById(R.id.table)) // Take Screenshot for View
                 deleteBtn.setImageBitmap(bitmap)
-
                 SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
-
-
-
-
             }
+
             R.id.delete -> {
                 Toast.makeText(this, "delete clicked", Toast.LENGTH_SHORT).show()
             }
             R.id.returnLastColor -> {
-                Toast.makeText(this, "screenshot clicked", Toast.LENGTH_SHORT).show()
                 seekBar.color = undoColor
+            }
+            R.id.eraser ->{
+                Toast.makeText(this, "White", Toast.LENGTH_SHORT).show()
+                currentColor = Color.WHITE
             }
 
         }
@@ -155,6 +153,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
 
         lastColorBtn = findViewById(R.id.returnLastColor)
         lastColorBtn.setOnClickListener(this)
+
+        eraser = findViewById(R.id.eraser)
+        eraser.setOnClickListener(this)
+
+
 
     }
 

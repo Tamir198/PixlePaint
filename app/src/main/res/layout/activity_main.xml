@@ -50,9 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0"
-        app:layout_constraintGuide_begin="14dp" />
-
+        app:layout_constraintGuide_begin="14dp"
+        app:layout_constraintGuide_percent="0" />
 
 
     <Button
@@ -97,67 +96,77 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
 
-
-
     <ImageView
         android:id="@+id/delete"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_delete"
-        app:layout_constraintBottom_toTopOf="@+id/returnLastColor"
+        app:layout_constraintBottom_toBottomOf="@+id/small"
         app:layout_constraintEnd_toStartOf="@+id/button9"
         app:layout_constraintHeight_percent="0.075"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/camera" />
+        app:layout_constraintStart_toEndOf="@+id/camera"
+        app:layout_constraintTop_toTopOf="@+id/small" />
 
     <Button
         android:id="@+id/small"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/small"
         android:background="@drawable/non_selected_button"
-        app:layout_constraintBottom_toBottomOf="@+id/delete"
+        android:text="@string/small"
+        app:layout_constraintBottom_toTopOf="@+id/returnLastColor"
         app:layout_constraintEnd_toStartOf="@+id/medium"
         app:layout_constraintHeight_percent="0.075"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button10" />
+        app:layout_constraintStart_toEndOf="@+id/eraser" />
 
     <Button
         android:id="@+id/medium"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/medium"
         android:background="@drawable/non_selected_button"
-        app:layout_constraintBottom_toBottomOf="@+id/delete"
+        android:text="@string/medium"
+        app:layout_constraintBottom_toBottomOf="@+id/small"
         app:layout_constraintEnd_toStartOf="@+id/large"
         app:layout_constraintHeight_percent="0.075"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/small" />
+        app:layout_constraintStart_toEndOf="@+id/small"
+        app:layout_constraintTop_toTopOf="@+id/small" />
 
     <Button
         android:id="@+id/camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/delete"
+        app:layout_constraintBottom_toBottomOf="@+id/small"
         app:layout_constraintEnd_toStartOf="@+id/delete"
         app:layout_constraintHeight_percent="0.075"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/large"
-        app:layout_constraintTop_toTopOf="@+id/delete" />
+        app:layout_constraintTop_toTopOf="@+id/small" />
+
+    <Button
+        android:id="@+id/eraser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/eraser"
+        app:layout_constraintBottom_toBottomOf="@+id/small"
+        app:layout_constraintEnd_toStartOf="@+id/small"
+        app:layout_constraintStart_toEndOf="@+id/button10"
+        app:layout_constraintTop_toTopOf="@+id/small" />
 
     <Button
         android:id="@+id/large"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/large"
         android:background="@drawable/selected_button"
-        app:layout_constraintBottom_toBottomOf="@+id/camera"
+        android:text="@string/large"
+        app:layout_constraintBottom_toBottomOf="@+id/small"
         app:layout_constraintEnd_toStartOf="@+id/camera"
         app:layout_constraintHeight_percent="0.075"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/medium" />
-
+        app:layout_constraintStart_toEndOf="@+id/medium"
+        app:layout_constraintTop_toTopOf="@+id/small" />
 
 
     <TableLayout
@@ -165,19 +174,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#CBD8CC"
-        android:stretchColumns="*"
         android:shrinkColumns="*"
+        android:stretchColumns="*"
         app:layout_constraintBottom_toTopOf="@+id/large"
         app:layout_constraintEnd_toStartOf="@+id/button9"
         app:layout_constraintStart_toEndOf="@+id/button10"
-        app:layout_constraintTop_toBottomOf="@+id/button5">
-    </TableLayout>
-
-
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
