@@ -38,6 +38,9 @@ dependencies {
     //screenshot ofa view library: https://github.com/abdallahalaraby/Blink
     implementation  'com.abdallahalaraby.blink:library:0.1.2@aar'
 
+    //for permission checking and asking https://github.com/googlesamples/easypermissions
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 
 
 
