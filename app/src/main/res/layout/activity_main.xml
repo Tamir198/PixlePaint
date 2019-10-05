@@ -88,6 +88,7 @@
         android:id="@+id/returnLastColor"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
         android:text="@string/undo"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
@@ -169,17 +170,18 @@
         app:layout_constraintTop_toTopOf="@+id/small" />
 
 
-    <TableLayout
-        android:id="@+id/table"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#CBD8CC"
-        android:shrinkColumns="*"
-        android:stretchColumns="*"
-        app:layout_constraintBottom_toTopOf="@+id/large"
-        app:layout_constraintEnd_toStartOf="@+id/button9"
-        app:layout_constraintStart_toEndOf="@+id/button10"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#CBD8CC"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"
+                app:layout_constraintBottom_toTopOf="@+id/large"
+                app:layout_constraintEnd_toStartOf="@+id/button9"
+                app:layout_constraintStart_toEndOf="@+id/button10"
+                app:layout_constraintTop_toBottomOf="@+id/button5"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

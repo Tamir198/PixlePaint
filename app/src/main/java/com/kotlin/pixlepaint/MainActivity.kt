@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
         setContentView(R.layout.activity_main)
 
         initViews()
-        configureTable(11, 14)
+        configureTable(11, 17)
         currentSeekBarColor()
 
 
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
                 highlightBtn(R.id.medium)
             }
             R.id.large -> {
-                configureTable(11, 14)
+                configureTable(11, 17)
                 highlightBtn(R.id.large)
             }
             R.id.camera -> {
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
             }
 
             R.id.delete -> {
-                Toast.makeText(this, "delete clicked", Toast.LENGTH_SHORT).show()
+                largeTableBtn.performClick()
             }
             R.id.returnLastColor -> {
                 seekBar.color = undoColor
