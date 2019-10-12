@@ -111,7 +111,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
 
                 val permission = CheckPermissions(this,this)
                 if(permission.storage()) SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
-                SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
+                //todo see why the image is not saved to gallery
+                //SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
 
 
             }
