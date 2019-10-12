@@ -1,8 +1,4 @@
 package com.kotlin.pixlepaint
-
-import android.content.ContentResolver
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,12 +8,6 @@ import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
 import com.abdallahalaraby.blink.Screenshot
-import android.os.Environment
-import android.provider.MediaStore
-import androidx.core.content.ContextCompat
-import java.io.File
-import java.io.FileOutputStream
-import java.util.jar.Manifest
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
@@ -117,7 +107,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
             R.id.camera -> {
                 val bitmap = Screenshot.getInstance().takeScreenshotForView(findViewById(R.id.table)) // Take Screenshot for View
                 deleteBtn.setImageBitmap(bitmap)
+
+
+                val permission = CheckPermissions(this,this)
+                if(permission.storage()) SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
                 SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
+
+
             }
 
             R.id.delete -> {
