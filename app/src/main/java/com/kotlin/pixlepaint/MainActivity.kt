@@ -106,13 +106,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, InitViews {
             }
             R.id.camera -> {
                 val bitmap = Screenshot.getInstance().takeScreenshotForView(findViewById(R.id.table)) // Take Screenshot for View
-                deleteBtn.setImageBitmap(bitmap)
-
-
+                // deleteBtn.setImageBitmap(bitmap)
                 val permission = CheckPermissions(this,this)
-                if(permission.storage()) SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
-                //todo see why the image is not saved to gallery
-                //SaveImage(bitmap,"PixelPaint","nice",this).saveImage()
+                if(permission.storage()){
+                    SaveImage(bitmap,"PixelPaint","nice",this,this).saveImage()
+                }
+
 
 
             }
